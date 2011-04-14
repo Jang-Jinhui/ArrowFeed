@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_mark_all_read"
+        android:title="@string/menu_mark_all_read"
+        android:icon="@android:drawable/ic_menu_set_as" />
+    <item
+        android:id="@+id/menu_preferences"
+        android:title="@string/menu_preferences"
+        android:icon="@android:drawable/ic_menu_preferences" />
+</menu>

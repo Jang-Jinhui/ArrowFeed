@@ -1,6 +1,9 @@
 package com.protory.arrow.rss;
 
+import com.protory.arrow.rss.ui.HomeActivity;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class MainActivity extends Activity {
@@ -8,6 +11,12 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+
+        startHome();
+    }
+
+    private void startHome() {
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 }
