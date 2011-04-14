@@ -1,10 +1,10 @@
 package com.protory.arrow.rss;
 
-import com.protory.arrow.rss.ui.HomeActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.protory.arrow.rss.ui.FeedListActivity;
 
 public class MainActivity extends Activity {
     /** Called when the activity is first created. */
@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
     }
 
     private void startHome() {
-        startActivity(new Intent(this, HomeActivity.class));
+        startActivity(new Intent(this, FeedListActivity.class));
         finish();
     }
 }

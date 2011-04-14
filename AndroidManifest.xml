@@ -14,7 +14,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.HomeActivity"
+        <activity android:name=".ui.FeedListActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

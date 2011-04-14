@@ -1,12 +1,12 @@
 package com.protory.arrow.rss.ui;
 
-import com.protory.arrow.rss.R;
-
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 
-public class HomeActivity extends Activity {
+import com.protory.arrow.rss.R;
+
+public class FeedListActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class HomeActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
-        getMenuInflater().inflate(R.menu.home_option_menu, menu);
+        getMenuInflater().inflate(R.menu.feed_list_option_menu, menu);
 
         return true;
     }
