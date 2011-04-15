@@ -3,6 +3,14 @@
     <string name="app_name">ArrowFeed</string>
 
     <!-- Define menu title -->
+    <string name="menu_new_feed">New feed</string>
     <string name="menu_mark_all_read">Mark all as read</string>
     <string name="menu_preferences">Settings</string>
+
+    <!-- Define label title -->
+    <string name="label_ok">OK</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="label_url_hint">http://example-rss.com/</string>
+
+    <!--  -->
 </resources>
