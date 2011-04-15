@@ -7,8 +7,13 @@ import android.os.Bundle;
 import com.protory.arrow.rss.ui.FeedListActivity;
 
 public class MainActivity extends Activity {
-    int[] ic = new int[]{android.R.drawable.ic_menu_add, android.R.drawable.ic_menu_save};
-
+    static {
+        try {
+            Class.forName("com.protory.arrow.rss.persistence.DatabaseHelper");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
