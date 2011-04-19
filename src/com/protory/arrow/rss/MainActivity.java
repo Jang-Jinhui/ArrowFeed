@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.protory.arrow.rss.ui.FeedListActivity;
+import com.protory.arrow.rss.presentation.FeedListActivity;
 
 public class MainActivity extends Activity {
     static {

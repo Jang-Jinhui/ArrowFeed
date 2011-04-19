@@ -1,4 +1,4 @@
-package com.protory.arrow.rss.ui;
+package com.protory.arrow.rss.presentation;
 
 import android.app.Activity;
 import android.os.Bundle;
