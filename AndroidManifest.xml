@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.protory.arrow.rss"
+      package="com.protory.arrow.feed"
       android:versionCode="1"
       android:versionName="0.1">
     <uses-sdk android:minSdkVersion="7" />
@@ -14,7 +14,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.FeedListActivity"
+        <activity android:name=".presentation.FeedListActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="presentation.NewFeedActivity"
+        <activity android:name="com.protory.arrow.feed.presentation.NewFeedActivityion.NewFeedActivity"
                 android:label="Create New Feed"
                 android:theme="@android:style/Theme.Dialog">
             <intent-filter>

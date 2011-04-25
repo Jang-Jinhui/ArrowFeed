@@ -1,10 +1,10 @@
-package com.protory.arrow.rss;
+package com.protory.arrow.feed;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.protory.arrow.rss.presentation.FeedListActivity;
+import com.protory.arrow.feed.presentation.FeedListActivity;
 
 public class MainActivity extends Activity {
     static {

@@ -1,4 +1,4 @@
-package com.protory.arrow.rss.persistence;
+package com.protory.arrow.feed.persistence;
 
 import java.sql.SQLException;
 
@@ -12,7 +12,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFacto
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.protory.arrow.rss.domain.Feed;
+import com.protory.arrow.feed.domain.Feed;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final Logger LOG = LoggerFactory.getLogger(DatabaseHelper.class);
