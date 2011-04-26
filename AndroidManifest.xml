@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.protory.arrow.feed.presentation.NewFeedActivityion.NewFeedActivity"
+        <activity android:name=".presentation.NewFeedActivity"
                 android:label="Create New Feed"
                 android:theme="@android:style/Theme.Dialog">
             <intent-filter>

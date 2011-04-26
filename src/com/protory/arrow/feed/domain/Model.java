@@ -1,6 +1,9 @@
 package com.protory.arrow.feed.domain;
 
-public interface Model<ID> {
+import java.io.Serializable;
+
+public interface Model<ID> extends Serializable{
     ID getId();
+
     String getContent();
 }

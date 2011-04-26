@@ -15,13 +15,14 @@
             android:layout_marginRight="10dip"
             android:layout_marginBottom="10dip" />
 
-    <EditText
+    <EditText android:id="@+id/edit_uri"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
             android:singleLine="true"
-            android:hint="@string/label_url_hint" />
+            android:hint="@string/label_uri_hint"
+             />
 
     <LinearLayout
             android:layout_width="fill_parent"
@@ -31,14 +32,14 @@
             android:layout_marginTop="5dip"
             android:layout_marginRight="10dip">
 
-        <Button android:id="@+id/ok"
+        <Button android:id="@+id/button_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dip"
                 android:paddingRight="20dip"
                 android:text="@string/label_ok" />
 
-        <Button android:id="@+id/cancel"
+        <Button android:id="@+id/button_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dip"

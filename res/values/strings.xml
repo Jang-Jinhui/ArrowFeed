@@ -10,7 +10,7 @@
     <!-- Define label title -->
     <string name="label_ok">OK</string>
     <string name="label_cancel">Cancel</string>
-    <string name="label_url_hint">http://example-rss.com/</string>
+    <string name="label_uri_hint">http://example-rss.com/</string>
 
     <!--  -->
 </resources>

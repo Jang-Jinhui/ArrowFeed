@@ -1,5 +1,6 @@
 package com.protory.arrow.feed.domain;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import com.j256.ormlite.field.DatabaseField;
@@ -7,37 +8,72 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "feed")
 public class Feed implements Model<Integer> {
+    private static final long serialVersionUID = -1610158081900273974L;
+
     public static final String _ID = "_id";
-    public static final String URI = "uri";
-    public static final String GENERATE_DATE = "registDate";
+    public static final String TITLE = "title";
+    public static final String LINK = "link";
+    public static final String DESCRIPTION = "description";
+    public static final String PUB_DATE = "pubDate";
+    public static final String GENERATE_DATE = "generateDate";
 
     @DatabaseField(generatedId = true, columnName = _ID)
     private Integer id;
-    @DatabaseField(columnName = URI, canBeNull = false)
-    private String uri;
+    @DatabaseField(columnName = LINK, canBeNull = false)
+    private String link;
+    @DatabaseField(columnName = TITLE, canBeNull = false)
+    private String title;
+    @DatabaseField(columnName = DESCRIPTION, canBeNull = false)
+    private String description;
+    @DatabaseField(columnName = PUB_DATE, canBeNull = false)
+    private String pubDate;
     @DatabaseField(columnName = GENERATE_DATE, canBeNull = false)
-    private Date generateDate;
+    private Date generateDate = Calendar.getInstance().getTime();
 
     @Override
     public Integer getId() {
         return id;
     }
 
-    @Override
-    public String getContent() {
-        return uri;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getUri() {
-        return uri;
+    @Override
+    public String getContent() {
+        return title;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPubDate() {
+        return pubDate;
+    }
+
+    public void setPubDate(String pubDate) {
+        this.pubDate = pubDate;
     }
 
     public Date getGenerateDate() {
@@ -47,4 +83,5 @@ public class Feed implements Model<Integer> {
     public void setGenerateDate(Date generateDate) {
         this.generateDate = generateDate;
     }
+
 }

@@ -9,7 +9,7 @@ import com.protory.arrow.feed.presentation.FeedListActivity;
 public class MainActivity extends Activity {
     static {
         try {
-            Class.forName("com.protory.arrow.rss.persistence.DatabaseHelper");
+            Class.forName("com.protory.arrow.feed.persistence.DatabaseHelper");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

@@ -15,9 +15,12 @@ import com.google.code.microlog4android.LoggerFactory;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.protory.arrow.feed.domain.Model;
+import com.protory.arrow.feed.utils.ConvertUtils;
 
 public abstract class OrmLiteBaseAdapter<T extends Model<ID>, ID> extends BaseAdapter {
     private static final Logger LOG = LoggerFactory.getLogger(OrmLiteBaseAdapter.class);
+
+    private final Object mLock = new Object();
 
     private Context mContext;
     private OrmLiteSqliteOpenHelper mOrmLiteSqliteOpenHelper;
@@ -28,7 +31,7 @@ public abstract class OrmLiteBaseAdapter<T extends Model<ID>, ID> extends BaseAd
     private int mTextViewResourceId;
 
     public OrmLiteBaseAdapter(Context context, OrmLiteSqliteOpenHelper ormLiteSqliteOpenHelper) {
-        init(context, ormLiteSqliteOpenHelper, android.R.layout.simple_list_item_1, android.R.id.title);
+        init(context, ormLiteSqliteOpenHelper, android.R.layout.simple_list_item_1, 0);
     }
 
     private void init(Context context, OrmLiteSqliteOpenHelper ormLiteSqliteOpenHelper, int resourceId,
@@ -61,9 +64,32 @@ public abstract class OrmLiteBaseAdapter<T extends Model<ID>, ID> extends BaseAd
         return mDao;
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        try {
+            synchronized (mLock) {
+                mObjects = mDao.queryForAll();
+                super.notifyDataSetChanged();
+            }
+        } catch (SQLException e) {
+            LOG.fatal(e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public void add(T object) {
-        mObjects.add(object);
-        notifyDataSetChanged();
+        try {
+            int result = mDao.create(object);
+            if (result == 1) {
+                notifyDataSetChanged();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void remove(int position) {
+
     }
 
     @Override
@@ -78,24 +104,12 @@ public abstract class OrmLiteBaseAdapter<T extends Model<ID>, ID> extends BaseAd
 
     @Override
     public long getItemId(int position) {
-        return convertLong(getItem(position).getId());
+        return ConvertUtils.asLong(getItem(position).getId(), position);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         return createViewFromResource(position, convertView, parent, mResourceId, mTextViewResourceId);
-    }
-
-    private long convertLong(ID id) {
-        if (id instanceof Long) {
-            return (Long) id;
-        } else if (id instanceof Integer) {
-            return ((Integer) id).longValue();
-        } else if (id instanceof String) {
-            return Long.valueOf((String) id);
-        } else {
-            throw new IllegalArgumentException("The ID must be long, integer or string.");
-        }
     }
 
     private View createViewFromResource(int position, View convertView, ViewGroup parent, int resourceId,
@@ -107,7 +121,11 @@ public abstract class OrmLiteBaseAdapter<T extends Model<ID>, ID> extends BaseAd
 
         TextView textView;
         try {
-            textView = (TextView) view.findViewById(textViewResourceId);
+            if (textViewResourceId == 0) {
+                textView = (TextView) view;
+            } else {
+                textView = (TextView) view.findViewById(textViewResourceId);
+            }
         } catch (ClassCastException e) {
             LOG.error(e.getMessage(), e);
             throw new IllegalStateException("Requires the resource ID to be a TextView", e);
