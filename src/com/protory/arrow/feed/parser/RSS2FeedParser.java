@@ -22,39 +22,22 @@ public class RSS2FeedParser {
     }
 
     private static void readyChannel(FeedParserListener listener, Document doc) {
-        XPath xpath = XPathFactory.newInstance().newXPath();
-
-
+        XPath xPath = XPathFactory.newInstance().newXPath();
         try {
-            System.out.println(xpath.evaluate("//channel/title", doc, XPathConstants.NODE));
-            String title = ((Node) xpath.evaluate("/channel/title", doc, XPathConstants.NODE)).getNodeValue();
-//            String link = ((Node) xpath.evaluate("/channel/link", doc, XPathConstants.NODE)).getNodeValue();
-//            String description = ((Node) xpath.evaluate("/channel/description", doc, XPathConstants.NODE)).getNodeValue();
-//            String pubDate = ((Node) xpath.evaluate("/channel/pubDate", doc, XPathConstants.NODE)).getNodeValue();
+            String title = ((Node) xPath.evaluate("//channel/title", doc, XPathConstants.NODE)).getTextContent();
+            String link = ((Node) xPath.evaluate("//channel/link", doc, XPathConstants.NODE)).getTextContent();
+            String description = ((Node) xPath.evaluate("//channel/description", doc, XPathConstants.NODE)).getTextContent();
+            String pubDate = ((Node) xPath.evaluate("//channel/pubDate", doc, XPathConstants.NODE)).getTextContent();
 
-//            listener.onChannel(title, link, description, parseDate(pubDate, PUB_DATE_PATTERN));
+            listener.onChannel(title, link, description, parseDate(pubDate, PUB_DATE_PATTERN));
         } catch (Exception e) {
             throw new FeedParserException(e);
 
         }
-        // String title =
-        // doc.selectSingleNode("//channel/title").getStringValue();
-        // String link =
-        // doc.selectSingleNode("//channel/link").getStringValue();
-        // String description =
-        // doc.selectSingleNode("//channel/description").getStringValue();
-        // String pubDate =
-        // doc.selectSingleNode("//channel/pubDate").getStringValue();
-        //
-        // try {
-        // listener.onChannel(title, link, description, parseDate(pubDate,
-        // PUB_DATE_PATTERN));
-        // } catch (Exception e) {
-        // throw new FeedParserException(e);
-        // }
     }
 
     private static void readyImage(FeedParserListener listener, Document doc) {
+        XPath xPath = XPathFactory.newInstance().newXPath();
         // Node imageNode = doc.selectSingleNode("//channel/image");
         // if (imageNode == null) {
         // return;
