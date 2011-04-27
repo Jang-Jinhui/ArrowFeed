@@ -23,10 +23,10 @@ public class Feed implements Model<Integer> {
     private String link;
     @DatabaseField(columnName = TITLE, canBeNull = false)
     private String title;
-    @DatabaseField(columnName = DESCRIPTION, canBeNull = false)
+    @DatabaseField(columnName = DESCRIPTION)
     private String description;
     @DatabaseField(columnName = PUB_DATE, canBeNull = false)
-    private String pubDate;
+    private Date pubDate;
     @DatabaseField(columnName = GENERATE_DATE, canBeNull = false)
     private Date generateDate = Calendar.getInstance().getTime();
 
@@ -68,11 +68,11 @@ public class Feed implements Model<Integer> {
         this.description = description;
     }
 
-    public String getPubDate() {
+    public Date getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(String pubDate) {
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
 

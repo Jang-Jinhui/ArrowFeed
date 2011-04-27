@@ -4,14 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.code.microlog4android.Logger;
 import com.google.code.microlog4android.LoggerFactory;
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.protory.arrow.feed.R;
 import com.protory.arrow.feed.controller.FeedListAdapter;
-import com.protory.arrow.feed.domain.Feed;
 import com.protory.arrow.feed.persistence.DatabaseHelper;
+import com.protory.arrow.feed.utils.FeedParserStatus;
 
 public class FeedListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
     public static final int REQUEST_CODE_NEW_FEED = 11;
@@ -66,10 +67,14 @@ public class FeedListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
                 LOG.debug("data url: " + uri);
             }
 
-            Feed feed = new Feed();
-            feed.setLink(uri);
-            mListAdapter.add(feed);
-
+            try {
+                FeedParserStatus status = new FeedParserStatus(uri);
+                status.parse();
+                mListAdapter.add(status.getFeed());
+            } catch (Exception e) {
+                Toast.makeText(this, "Not add feed", Toast.LENGTH_SHORT);
+                throw new RuntimeException(e);
+            }
             break;
 
         default:
@@ -78,4 +83,5 @@ public class FeedListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }

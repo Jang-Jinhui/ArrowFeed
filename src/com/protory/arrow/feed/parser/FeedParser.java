@@ -1,29 +1,19 @@
 package com.protory.arrow.feed.parser;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
 
 public class FeedParser {
 
-    public void parse(FeedParserListener feedParserListener, String resource) throws Exception {
-        InputStream is = null;
-        try {
-            URL url = new URL(resource);
-            is = url.openStream();
-
-        } catch (Exception e) {
-            throw new FeedParserException(e);
-        } finally {
-            closeQuietly(is);
+    public void parse(FeedParserListener listener, String resource) throws Exception {
+        Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(resource);
+        String root = doc.getDocumentElement().getNodeName();
+        if ("rss".equals(root)) {
+            RSS2FeedParser.parser(listener, doc);
+            return;
         }
-    }
 
-    private void closeQuietly(InputStream is) {
-        try {
-            is.close();
-        } catch (IOException e) {
-            throw new FeedParserException(e);
-        }
+        throw new IllegalStateException("Not support feed.");
     }
 }
