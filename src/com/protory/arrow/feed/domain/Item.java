@@ -1,6 +1,6 @@
 package com.protory.arrow.feed.domain;
 
-public class FeedItem implements Model<Integer> {
+public class Item implements Model<Integer> {
     private static final long serialVersionUID = 7260896144448222172L;
 
     private int id;

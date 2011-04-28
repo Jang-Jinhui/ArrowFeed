@@ -16,13 +16,13 @@
             android:layout_marginBottom="10dip" />
 
     <EditText android:id="@+id/edit_uri"
+            android:inputType="textUri"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
             android:singleLine="true"
-            android:hint="@string/label_uri_hint"
-             />
+            android:hint="@string/label_uri_hint" />
 
     <LinearLayout
             android:layout_width="fill_parent"

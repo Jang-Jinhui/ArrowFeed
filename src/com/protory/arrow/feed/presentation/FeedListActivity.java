@@ -1,5 +1,7 @@
 package com.protory.arrow.feed.presentation;
 
+import java.util.Date;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,8 +13,11 @@ import com.google.code.microlog4android.LoggerFactory;
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.protory.arrow.feed.R;
 import com.protory.arrow.feed.controller.FeedListAdapter;
+import com.protory.arrow.feed.domain.Feed;
+import com.protory.arrow.feed.parser.DefaultFeedParserListener;
+import com.protory.arrow.feed.parser.FeedParser;
+import com.protory.arrow.feed.parser.FeedParserFactory;
 import com.protory.arrow.feed.persistence.DatabaseHelper;
-import com.protory.arrow.feed.utils.FeedParserStatus;
 
 public class FeedListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
     public static final int REQUEST_CODE_NEW_FEED = 11;
@@ -68,9 +73,11 @@ public class FeedListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
             }
 
             try {
-                FeedParserStatus status = new FeedParserStatus(uri);
-                status.parse();
-                mListAdapter.add(status.getFeed());
+                FeedParser parser = FeedParserFactory.newFeedParserFactory().newFeedParser();
+                FeedParserListenerImpl listener = new FeedParserListenerImpl();
+                parser.parse(listener, uri);
+
+                mListAdapter.add(listener.feed);
             } catch (Exception e) {
                 Toast.makeText(this, "Not add feed", Toast.LENGTH_SHORT);
                 throw new RuntimeException(e);
@@ -84,4 +91,15 @@ public class FeedListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    class FeedParserListenerImpl extends DefaultFeedParserListener {
+        Feed feed;
+        @Override
+        public void onChannel(String title, String link, String description, Date pubDate) {
+            feed = new Feed();
+            feed.setTitle(title);
+            feed.setLink(link);
+            feed.setDescription(description);
+            feed.setPubDate(pubDate);
+        }
+    }
 }

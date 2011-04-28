@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.protory.arrow.feed.controller.FeedListRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:paddingRight="?android:attr/scrollbarSize">
+
+    <ImageView android:id="@+id/read_indicator"
+            android:layout_width="3dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_read_indicator"
+            android:visibility="visible" />
+
+    <ImageView android:id="@+id/image"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_toRightOf="@id/read_indicator"
+            android:layout_marginLeft="5dip"
+            android:layout_marginTop="5dip"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon"
+            android:visibility="gone" />
+
+    <TextView android:id="@+id/pub_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="9dip"
+            android:layout_marginLeft="5dip"
+            android:singleLine="true"
+            android:hint="MM/dd/yy"
+            style="@style/TextAppearance.PubDate" />
+
+    <TextView android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/image"
+            android:layout_toLeftOf="@id/pub_date"
+            android:layout_marginLeft="5dip"
+            android:layout_marginTop="5dip"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:hint="title hin ttitle hin ttitle hint title hint title hint"
+            style="@style/TextAppearance.Title" />
+
+    <TextView android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/image"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dip"
+            android:layout_marginBottom="5dip"
+            android:singleLine="false"
+            android:lines="2"
+            android:ellipsize="end"
+            android:hint="asdfasdfasdftitle hin ttitle hin ttitle hint title hint title hint asdfasdfasdftitle hin ttitle hin ttitle hint title hint title hint"
+            style="@style/TextAppearance.Description" />
+</com.protory.arrow.feed.controller.FeedListRow>

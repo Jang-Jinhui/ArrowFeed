@@ -1,5 +1,6 @@
 package com.protory.arrow.feed.parser;
 
+import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertFalse;
 
@@ -15,7 +16,7 @@ public class FeedParserTest {
 
     @Test
     public void newFeedParser() {
-        FeedParser feedParser = FeedParserFactory.newFeedParser();
+        FeedParser feedParser = FeedParserFactory.newFeedParserFactory().newFeedParser();
 
         assertNotNull(feedParser);
     }
@@ -30,7 +31,7 @@ public class FeedParserTest {
 
     @Test
     public void parseFeedChannel() throws Exception {
-        FeedParser feedParser = FeedParserFactory.newFeedParser();
+        FeedParser feedParser = FeedParserFactory.newFeedParserFactory().newFeedParser();
         final Channel channel = new Channel();
 
         feedParser.parse(new DefaultFeedParserListener() {
@@ -51,26 +52,40 @@ public class FeedParserTest {
 
     @Test
     public void parseFeedImage() throws Exception {
-        FeedParser feedParser = FeedParserFactory.newFeedParser();
-        final Image image = new Image();
+        FeedParser feedParser = FeedParserFactory.newFeedParserFactory().newFeedParser();
+        final Image image1 = new Image();
 
         feedParser.parse(new DefaultFeedParserListener() {
             @Override
             public void onImage(String url, String title, String link) {
-                image.url = url;
-                image.title = title;
-                image.link = link;
+                image1.url = url;
+                image1.title = title;
+                image1.link = link;
             }
         }, WITH_IMAGE_RSS_URL);
 
-        assertNotNull(image.url);
-        assertNotNull(image.title);
-        assertNotNull(image.link);
+        assertNotNull(image1.url);
+        assertNotNull(image1.title);
+        assertNotNull(image1.link);
+
+        final Image image2 = new Image();
+        feedParser.parse(new DefaultFeedParserListener() {
+            @Override
+            public void onImage(String url, String title, String link) {
+                image2.url = url;
+                image2.title = title;
+                image2.link = link;
+            }
+        }, WITHOUT_IMAGE_RSS_URL);
+
+        assertNull(image2.url);
+        assertNull(image2.title);
+        assertNull(image2.link);
     }
 
     @Test
     public void parseFeedItems() throws Exception {
-        FeedParser feedParser = FeedParserFactory.newFeedParser();
+        FeedParser feedParser = FeedParserFactory.newFeedParserFactory().newFeedParser();
         final List<Item> items = new ArrayList<Item>();
 
         feedParser.parse(new DefaultFeedParserListener() {

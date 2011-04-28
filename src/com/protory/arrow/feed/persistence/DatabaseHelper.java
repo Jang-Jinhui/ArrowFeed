@@ -13,6 +13,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.protory.arrow.feed.domain.Feed;
+import com.protory.arrow.feed.domain.Image;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final Logger LOG = LoggerFactory.getLogger(DatabaseHelper.class);
@@ -35,6 +36,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, Feed.class);
+            TableUtils.createTable(connectionSource, Image.class);
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Create database successful!!!");

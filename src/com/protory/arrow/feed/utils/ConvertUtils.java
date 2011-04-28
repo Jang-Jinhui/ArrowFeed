@@ -1,5 +1,8 @@
 package com.protory.arrow.feed.utils;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class ConvertUtils {
 
     public static long asLong(Object value) {
@@ -15,5 +18,9 @@ public class ConvertUtils {
             return Long.valueOf((String) value);
         }
         return defaultValue;
+    }
+
+    public static String toString(Date date, int style) {
+        return DateFormat.getDateInstance(style).format(date);
     }
 }
