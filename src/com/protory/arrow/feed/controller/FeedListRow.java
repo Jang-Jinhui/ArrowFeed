@@ -44,8 +44,16 @@ public class FeedListRow extends RelativeLayout {
     }
 
     public void bind(Feed item) {
+        mReadIndicator.setVisibility(VISIBLE);
         mTitle.setText(item.getTitle());
         mDescription.setText(item.getDescription());
         mPubDate.setText(DateUtils.format(item.getPubDate(), "MM/dd/yyyy"));
+        // process image
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mImage.setImageResource(R.drawable.icon);
+            }
+        });
     }
 }
