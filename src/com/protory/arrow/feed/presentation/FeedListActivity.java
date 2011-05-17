@@ -14,6 +14,7 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.protory.arrow.feed.R;
 import com.protory.arrow.feed.controller.FeedListAdapter;
 import com.protory.arrow.feed.domain.Feed;
+import com.protory.arrow.feed.domain.Image;
 import com.protory.arrow.feed.parser.DefaultFeedParserListener;
 import com.protory.arrow.feed.parser.FeedParser;
 import com.protory.arrow.feed.parser.FeedParserFactory;
@@ -79,8 +80,7 @@ public class FeedListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
 
                 mListAdapter.add(listener.feed);
             } catch (Exception e) {
-                Toast.makeText(this, "Not add feed", Toast.LENGTH_SHORT);
-                throw new RuntimeException(e);
+                Toast.makeText(this, "Not add feed", Toast.LENGTH_SHORT).show();
             }
             break;
 
@@ -93,6 +93,7 @@ public class FeedListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
 
     class FeedParserListenerImpl extends DefaultFeedParserListener {
         Feed feed;
+        Image image;
         @Override
         public void onChannel(String title, String link, String description, Date pubDate) {
             feed = new Feed();
@@ -100,6 +101,14 @@ public class FeedListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
             feed.setLink(link);
             feed.setDescription(description);
             feed.setPubDate(pubDate);
+        }
+
+        @Override
+        public void onImage(String url, String title, String link) {
+            LOG.debug(url);
+            LOG.debug(title);
+            LOG.debug(link);
+            super.onImage(url, title, link);
         }
     }
 }

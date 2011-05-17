@@ -53,6 +53,7 @@ public class FeedListRow extends RelativeLayout {
             @Override
             public void run() {
                 mImage.setImageResource(R.drawable.icon);
+                mImage.setVisibility(VISIBLE);
             }
         });
     }
